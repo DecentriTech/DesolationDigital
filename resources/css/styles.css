@@ -15,7 +15,7 @@ body {
 }
 
 .img {
-	width: 500px;
+	width: 20vh;
 }
 
 .dude {
@@ -23,5 +23,5 @@ body {
 }
 
 .thedude {
-	width: 300px;
+	width: 30vh;
 }
