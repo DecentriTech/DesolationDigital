@@ -1,9 +1,27 @@
 body {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
 	background-color: #000;
+    margin: 0px;
+    height: 100vh;
+}
+
+.logo {
+	display: inline-flex;
+    justify-content: center;
 }
 
 .img {
 	width: 500px;
+}
+
+.dude {
+	display: inline-flex;
+}
+
+.thedude {
+	width: 300px;
 }
