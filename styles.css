@@ -35,6 +35,11 @@ body {
   line-height: 1.6;
 }
 
+body.nav-open {
+  overflow: hidden;
+  padding-right: var(--scrollbar-width, 0px);
+}
+
 h1,
 h2,
 h3 {
@@ -129,6 +134,7 @@ img {
   justify-content: space-between;
   gap: 2rem;
   padding: 1.8rem 0;
+  position: relative;
 }
 
 .brand {
@@ -136,6 +142,8 @@ img {
   align-items: center;
   gap: 0.75rem;
   font-weight: 600;
+  position: relative;
+  z-index: 6;
 }
 
 .brand img {
@@ -211,6 +219,87 @@ img {
   font-size: 0.95rem;
   color: var(--muted);
   font-weight: 500;
+}
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  position: relative;
+  z-index: 6;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.nav-toggle::before,
+.nav-toggle::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 200ms ease, top 200ms ease, opacity 200ms ease;
+  animation: none;
+}
+
+.nav-toggle::before {
+  top: 14px;
+}
+
+.nav-toggle::after {
+  top: 28px;
+}
+
+.nav-toggle-bar {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 21px;
+  height: 2px;
+  background: currentColor;
+  transition: opacity 200ms ease;
+  animation: none;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.nav-toggle:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-toggle:active {
+  transform: none;
+}
+
+.site-header.scrolled .nav-toggle {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .nav-links a.active,
@@ -712,16 +801,81 @@ img {
 
 @media (max-width: 860px) {
   .nav {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
   }
 
   .nav-links {
-    flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    padding: calc(var(--header-height) + 2.5rem) 1.5rem 2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    background: rgba(180, 63, 63, 1);
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    z-index: 4;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 180ms ease, transform 180ms ease;
   }
 
   .nav-cta {
     width: 100%;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-header.nav-open .nav-links {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    animation: nav-slide 220ms ease;
+  }
+
+  .site-header.nav-open .nav-toggle::before {
+    top: 21px;
+    transform: rotate(45deg);
+  }
+
+  .site-header.nav-open .nav-toggle::after {
+    top: 21px;
+    transform: rotate(-45deg);
+  }
+
+  .site-header.nav-open .nav-toggle-bar {
+    opacity: 0;
+  }
+
+  .float {
+    animation: none;
+  }
+
+  .hero::before,
+  .page-hero::before {
+    animation: none;
+    transform: none;
+  }
+}
+
+@keyframes nav-slide {
+  from {
+    transform: translateY(-16px);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 
