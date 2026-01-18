@@ -622,6 +622,27 @@ img {
   gap: 0.4rem;
 }
 
+.team-details h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cofounder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(180, 63, 63, 0.95);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .tag {
   text-transform: uppercase;
   letter-spacing: 0.12em;
